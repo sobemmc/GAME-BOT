@@ -1,4 +1,5 @@
 import discord
+from discord.ext import commands
 import asyncio
 import random
 import os
@@ -59,10 +60,17 @@ async def on_ready():
     game = discord.Game('LOL')
     await client.change_presence(status=discord.Status.online, activity=game)
 
+@bot.command()
+async def test(ctx,arg):
+    await ctx.send(arg)    
     
 @client.event
 async def on_message(message):
-    
+    #To user who sent message
+    # await message.author.send(msg)
+    print(message.content)
+    if message.author == client.user:
+        return    
 
     if message.content.startswith("$롤전적"):
         try:
